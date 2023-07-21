@@ -73,3 +73,51 @@ The script will collect various computer information and create an HTML report f
 - The script uses basic HTML and inline CSS to style the table in the HTML report. You can modify the CSS styles or the HTML template to customize the appearance of the report as per your requirements.
 
 **Disclaimer**: It is essential to be cautious when sharing or accessing sensitive system information. Ensure that you run the script in a secure environment and use the generated report responsibly. Do not share the report with unauthorized individuals as it may contain system-related details.
+
+
+
+
+# Windows Defender and Windows Security Properties HTML Report Script
+
+This PowerShell script gathers information about Windows Defender and Windows Security properties and generates separate HTML reports for each category. The script utilizes the `Get-MpComputerStatus` cmdlet to retrieve the necessary data and creates dynamic HTML tables to display the collected properties and their corresponding values.
+
+## Windows Defender Properties
+
+The first part of the script focuses on gathering information related to Windows Defender properties. It captures data using the `Get-MpComputerStatus` cmdlet and then creates an HTML table to represent the properties. The properties included in the report are as follows:
+
+- Real-time Protection Enabled
+- Antivirus Signature Version
+- Last Full Scan Time
+- Last Quick Scan Time
+- Engine Version
+- Engine Updates Available
+
+The table organizes the properties in two columns: "Property" and "Value." The script then saves this information in a separate HTML file named "DefenderProperties.html."
+
+## Windows Security Properties
+
+The second part of the script replicates the process for Windows Security properties, utilizing the same `Get-MpComputerStatus` cmdlet to gather the data. The properties included in this report are identical to those in the Windows Defender report:
+
+- Real-time Protection Enabled
+- Antivirus Signature Version
+- Last Full Scan Time
+- Last Quick Scan Time
+- Engine Version
+- Engine Updates Available
+
+The Windows Security properties are displayed in a separate HTML table with the same two-column layout: "Property" and "Value." The information is then saved in another HTML file named "SecurityProperties.html."
+
+## Usage
+
+1. Save the script in a `.ps1` file, e.g., `WindowsPropertiesReport.ps1`.
+2. Open a PowerShell window and navigate to the folder containing the script.
+3. Execute the script by running `.\WindowsPropertiesReport.ps1`.
+
+The script will retrieve information about Windows Defender and Windows Security properties and create two separate HTML files: "DefenderProperties.html" and "SecurityProperties.html." Each HTML file will contain a table displaying the properties and their corresponding values.
+
+## Notes
+
+- The script employs basic HTML and inline CSS to style the tables in the HTML reports. You can customize the CSS styles or the HTML template to modify the appearance of the generated reports as per your requirements.
+- The script utilizes the `Get-MpComputerStatus` cmdlet, which is available in PowerShell 5.1 and later versions. Ensure that you have an appropriate version of PowerShell installed on the system where you intend to run the script.
+
+**Disclaimer**: Handle the generated HTML reports with care and ensure that you do not share sensitive security-related information with unauthorized individuals. Execute the script in a secure environment and use the reports responsibly.
