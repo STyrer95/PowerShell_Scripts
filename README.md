@@ -121,3 +121,46 @@ The script will retrieve information about Windows Defender and Windows Security
 - The script utilizes the `Get-MpComputerStatus` cmdlet, which is available in PowerShell 5.1 and later versions. Ensure that you have an appropriate version of PowerShell installed on the system where you intend to run the script.
 
 **Disclaimer**: Handle the generated HTML reports with care and ensure that you do not share sensitive security-related information with unauthorized individuals. Execute the script in a secure environment and use the reports responsibly.
+
+
+# Windows Defender Threat Detection and Email Report Script
+
+This PowerShell script is designed to check for threat detections in Windows Defender for the currently logged-in user. It generates an HTML report containing threat information and, if a threat is detected, composes and sends an email to the specified recipient with the threat detection details.
+
+## Function: Get-CurrentLoggedInUser
+
+This function retrieves the username of the currently logged-in user from the `Win32_ComputerSystem` WMI class. It handles domain-based usernames and extracts the user's actual username, which is then returned.
+
+## Function: Check-UserThreatDetection
+
+This function checks for threat detections in Windows Defender for a specified user and generates an HTML report with the detected threats. The function takes two parameters:
+
+- `userName`: The username of the user whose threat detections are to be checked.
+- `outputFile`: The path of the output HTML report file to be generated.
+
+If any threat is detected, the function proceeds to compose an email with the HTML report as the email body and sends it using the `Send-MailMessage` cmdlet. The email is sent to the specified recipient, and the sender, subject, SMTP server, and other email parameters can be customized in the script.
+
+## Main Script
+
+The main script starts by calling the `Get-CurrentLoggedInUser` function to retrieve the currently logged-in user's username. If successful, it displays the username and then proceeds to call the `Check-UserThreatDetection` function to check for threat detections and generate the HTML report.
+
+If a threat is detected, the script composes and sends an email to the specified recipient, including the HTML report as an attachment. The script uses the `Send-MailMessage` cmdlet to handle the email sending process.
+
+## Usage
+
+1. Save the script in a `.ps1` file, e.g., `ThreatDetectionAndEmailReport.ps1`.
+2. Open a PowerShell window and navigate to the folder containing the script.
+3. Customize the email parameters in the `Check-UserThreatDetection` function:
+
+   - `$emailParams['To']`: Replace with the recipient's email address.
+   - `$emailParams['From']`: Replace with the sender's email address.
+   - `$emailParams['Subject']`: Modify the subject of the email as desired.
+   - `$emailParams['SmtpServer']`: Replace with the SMTP server address for sending emails.
+
+4. Execute the script by running `.\ThreatDetectionAndEmailReport.ps1`.
+
+Please ensure that you have Microsoft Outlook installed on the system, and the email parameters are correctly configured with valid email addresses and SMTP server details. Additionally, have the necessary permissions and authentication credentials to send emails via the specified SMTP server.
+
+The script will check for threat detections in Windows Defender for the currently logged-in user. If any threats are found, it will generate an HTML report and send an email to the specified recipient with the threat details. If no threat is detected, the email will not be sent, and the script will proceed as usual.
+
+**Note**: It is essential to use this script responsibly and test it in a controlled environment before deploying it in a production setting. Sending sensitive information via email should be handled with care, and the script should only be run in secure and authorized environments.
